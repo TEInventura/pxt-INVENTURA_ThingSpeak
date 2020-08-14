@@ -112,5 +112,21 @@ namespace ESP8266ThingSpeak {
     export function isLastUploadSuccessful() {
         return last_upload_successful
     }
+    
+    export function ConectarWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate, ssid: string, pw: string){
+         wifi_connected = false
+        thingspeak_connected = false
+        serial.redirect(
+            tx,
+            rx,
+            baudrate
+        )
+        sendAT("AT+RESTORE", 1000) // restore to factory settings
+        sendAT("AT+CWMODE=1") // set to STA mode
+        sendAT("AT+RST", 1000) // reset
+        sendAT("AT+CWJAP=\"" + ssid + "\",\"" + pw + "\"", 0) // connect to Wifi router
+        wifi_connected = waitResponse()
+        basic.pause(100)
+    }
 
 }
