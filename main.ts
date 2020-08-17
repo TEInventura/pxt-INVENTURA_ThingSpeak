@@ -113,14 +113,4 @@ namespace ESP8266ThingSpeak {
         return last_upload_successful
     }
     
-    export function leds(){
-         basic.showLeds(`
-        . . # . .
-        . # # # .
-        . . # . .
-        . . # . .
-        . . # . .
-        `)
-    }
-
 }
